@@ -1,21 +1,24 @@
+import { ECollections } from "../../Database/database.model"
+import { IProject } from "./projects.model"
+
 export class ProjectService implements IProjectService {
     constructor(private readonly firestore: IFirestoreAdapter = firestoreAdapter) {}
 
-    public readonly createProject = (projct: IProject) => {
-        await this.firestore.createItem(ECollection.projects, project)
+    public readonly createProject = async (project: IProject) => {
+        await this.firestore.createItem(ECollections.project, project)
     }
-    public readonly getProject = (id: string) => {
-        return await this.firestore.getItem(ECollection.projects, id)
+    public readonly getProject = async (id: string) => {
+        return await this.firestore.getItem(ECollections.project, id)
     }
-    public readonly listProjects = () => {
-        return await this.firestore.getItems(ECollection.projects)
+    public readonly listProjects = async () => {
+        return await this.firestore.getItems(ECollections.project)
     }
-    public readonly listProjectsByPO = (id: string) => {
-        return await this.firestore.getItemsByParams(ECollection.projects, [{key: 'POId', type: '==', value: id}])
+    public readonly listProjectsByPO = async (id: string) => {
+        return await this.firestore.getItemsByParams(ECollections.project, [{key: 'POId', type: '==', value: id}])
     }
-    public readonly listProjectsByUser = (userId: string) => {
-        const projectsId = (await this.firestore.getItem(ECollection.users, userId)).projects
-        const promiseProjects = projectsId.map(async projectId => await this.firestore.getItem(ECollection.projct, projectId))
+    public readonly listProjectsByUser = async (userId: string) => {
+        const projectsId = (await this.firestore.getItem(ECollections.user, userId)).projects
+        const promiseProjects = projectsId.map(async projectId => await this.firestore.getItem(ECollections.projct, projectId))
         return await Promise.all(promiseProjects)
     }
 }
