@@ -37,7 +37,7 @@ class ProjectController implements IProjectController {
     try {
       const { id } = req.query
       const project = await this.projectService.getProject(id as string)
-      responseController(res, responseMessageDefault.post, showMessageMap.false, project)
+      responseController(res, responseMessageDefault.get, showMessageMap.false, project)
     } catch (error) {
       errorController(error, res)
     }
@@ -49,7 +49,7 @@ class ProjectController implements IProjectController {
   )(async (req: functions.https.Request, res: functions.Response<IResponse<IProject[]>>) => {
     try {
       const projects = await this.projectService.listProjects()
-      responseController(res, responseMessageDefault.post, showMessageMap.false, projects)
+      responseController(res, responseMessageDefault.get, showMessageMap.false, projects)
     } catch (error) {
       errorController(error, res)
     }
@@ -64,7 +64,7 @@ class ProjectController implements IProjectController {
     try {
       const { id } = req.query
       const projects = await this.projectService.listProjectsByPO(id as string)
-      responseController(res, responseMessageDefault.post, showMessageMap.false, projects)
+      responseController(res, responseMessageDefault.get, showMessageMap.false, projects)
     } catch (error) {
       errorController(error, res)
     }
