@@ -1,5 +1,5 @@
 import { IGenericDatabase } from '../../Database/database.model'
-import { IVacancy } from '../Vacancy/vacancy.model'
+import { IProjectVacancy } from '../Vacancy/vacancy.model'
 
 export interface IProjectController {
   readonly createProject: () => any
@@ -20,7 +20,7 @@ export interface IProject extends IGenericDatabase {
   readonly description: string
   readonly POId: string
   readonly enterpriseName: string
-  readonly vacancies: IVacancy[]
+  readonly vacancies: IProjectVacancy[]
   readonly benefits?: {
     readonly transportationVoucher?: number
     readonly mealTicket?: number

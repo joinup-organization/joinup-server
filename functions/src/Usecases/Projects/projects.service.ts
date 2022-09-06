@@ -8,7 +8,11 @@ export class ProjectService implements IProjectService {
   constructor(private readonly firestore: IFirestoreAdapter = firestoreAdapter) {}
 
   public readonly createProject = async (project: IProject) => {
-    await this.firestore.createItem(ECollections.project, project)
+    const projectId = await this.firestore.createItem(ECollections.project, project)
+    const createVacancyPromise = project.vacancies.map(
+      async vacancy => await this.firestore.createItem(ECollections.vacancy, { ...vacancy, projectId }),
+    )
+    await Promise.all(createVacancyPromise)
   }
 
   public readonly getProject = async (id: string) => {

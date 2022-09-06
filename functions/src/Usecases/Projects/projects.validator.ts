@@ -39,6 +39,7 @@ class CreateProjectValidator {
               .object()
               .strict()
               .shape({
+                id: yup.string().strict().required(),
                 name: yup.string().strict().required(),
                 level: yup
                   .string()
