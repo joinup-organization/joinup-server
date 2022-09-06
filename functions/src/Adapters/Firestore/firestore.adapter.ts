@@ -140,6 +140,25 @@ class FirestoreAdapter implements IFirestoreAdapter {
     return document as unknown as T
   }
 
+  public createItemInInnerCollectionWithId = async <T>(
+    collection: ECollections,
+    id: string,
+    innerCollection: ECollections,
+    item: T & { id: string },
+  ) => {
+    const documentRef = await admin
+      .firestore()
+      .collection(collection)
+      .doc(id)
+      .collection(innerCollection)
+      .doc(item.id)
+    const doc = await documentRef.get()
+    if (doc.exists) {
+      throw new DefaultError('Documento já existe', 400)
+    }
+    await documentRef.set(item)
+  }
+
   public deleteItemInInnerCollection = async (
     collection: ECollections,
     id: string,

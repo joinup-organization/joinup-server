@@ -57,4 +57,10 @@ export interface IFirestoreAdapter {
     innerCollection: ECollections,
     itemId: string,
   ) => Promise<void>
+  createItemInInnerCollectionWithId: <T>(
+    collection: ECollections,
+    id: string,
+    innerCollection: ECollections,
+    item: T & { id: string },
+  ) => Promise<void>
 }
