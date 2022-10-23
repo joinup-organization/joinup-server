@@ -19,7 +19,10 @@ export interface IProject extends IGenericDatabase {
   readonly name: string
   readonly description: string
   readonly POId: string
-  readonly enterpriseName: string
+  readonly enterprise: {
+    readonly name: string
+    readonly id: string
+  }
   readonly vacancies: IProjectVacancy[]
   readonly benefits?: {
     readonly transportationVoucher?: number

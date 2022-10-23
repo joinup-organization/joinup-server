@@ -32,6 +32,7 @@ export interface IUserService {
   readonly getUser: (id: string) => Promise<IUser>
   readonly updateUserToEnroll: (user: IUser) => Promise<void>
   readonly listUser: () => Promise<IUser[]>
+  readonly getUserProjectEnroll: (id: string) => Promise<IProject[]>
 }
 
 export interface IUserController {
@@ -39,6 +40,7 @@ export interface IUserController {
   readonly getUser: () => any
   readonly updateUserToEnroll: () => any
   readonly listUser: () => any
+  readonly getUserProjectEnroll: () => any
 }
 
 export type TGender = 'M' | 'F'

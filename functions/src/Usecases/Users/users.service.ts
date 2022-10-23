@@ -31,4 +31,8 @@ export class UserService implements IUserService {
   public readonly updateUserToEnroll = async (user: IUser) => {
     return await this.firestore.updateItemById(ECollections.user, user.id, user)
   }
+
+  public readonly getUserProjectEnroll = async (id: string) => {
+    return (await this.firestore.getItem<IUser>(ECollections.user, id)).projects ?? []
+  }
 }

@@ -6,6 +6,7 @@ import { corsMiddleware } from '../../Middlewares/Cors.middlewares'
 import { responseController } from '../../Response/Response.controller'
 import { IResponse, responseMessageDefault, showMessageMap } from '../../Response/Response.model'
 import { getByIdValidator } from '../../Validator/id.validator'
+import { IProject } from '../Projects/projects.model'
 
 import { IUser, IUserController, IUserInitialData, IUserService } from './users.model'
 import { UserService } from './users.service'
@@ -67,6 +68,21 @@ class UserController implements IUserController {
       errorController(error, res)
     }
   })
+
+  public readonly getUserProjectEnroll = compose(
+    functions.https.onRequest,
+    getByIdValidator,
+    corsMiddleware,
+  )(async (req: functions.https.Request, res: functions.Response<IResponse<IProject[]>>) => {
+    try {
+      const { id } = req.body
+      const projects = await this.userService.getUserProjectEnroll(id)
+      responseController(res, responseMessageDefault.get, showMessageMap.false, projects)
+    } catch (error) {
+      errorController(error, res)
+    }
+  })
 }
 
-export const { createUser, getUser, listUser, updateUserToEnroll }: IUserController = new UserController()
+export const { createUser, getUser, listUser, updateUserToEnroll, getUserProjectEnroll }: IUserController =
+  new UserController()
