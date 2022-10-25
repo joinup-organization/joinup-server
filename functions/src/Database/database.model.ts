@@ -10,6 +10,7 @@ export enum ECollections {
   vacancy = 'vacancy',
   user = 'user',
   projectOwner = 'projectOwner',
+  'answer' = 'answer',
 }
 
 export interface optionWhere {
