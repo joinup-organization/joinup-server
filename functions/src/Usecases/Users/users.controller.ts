@@ -75,8 +75,8 @@ class UserController implements IUserController {
     corsMiddleware,
   )(async (req: functions.https.Request, res: functions.Response<IResponse<IProject[]>>) => {
     try {
-      const { id } = req.body
-      const projects = await this.userService.getUserProjectEnroll(id)
+      const { id } = req.query
+      const projects = await this.userService.getUserProjectEnroll(id as string)
       responseController(res, responseMessageDefault.get, showMessageMap.false, projects)
     } catch (error) {
       errorController(error, res)
