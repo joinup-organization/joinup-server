@@ -1,8 +1,8 @@
 export interface IVacancyService {
-  readonly getVacancy: (id: string) => Promise<IVacancy>
+  readonly getVacancy: (projectId: string, id: string) => Promise<IVacancy>
   readonly getVacanciesByProject: (projectId: string) => Promise<IVacancy[]>
   readonly getVacanciesByUser: (userId: string) => Promise<IVacancy[]>
-  readonly enrollVacancy: (vacancyId: string, userId: string) => Promise<void>
+  readonly enrollVacancy: (vacancyId: string, userId: string, projectId: string) => Promise<void>
   readonly listVacancies: () => Promise<IVacancy[]>
 }
 

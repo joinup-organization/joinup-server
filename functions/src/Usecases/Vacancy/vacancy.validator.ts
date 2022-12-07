@@ -26,6 +26,7 @@ class EnrollVacancyValidator {
     return yup.object().required().shape({
       vacancyId: yup.string().strict().required(),
       userId: yup.string().strict().required(),
+      projectId: yup.string().strict().required(),
     })
   }
 }
